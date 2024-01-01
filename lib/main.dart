@@ -1,15 +1,37 @@
 import 'dart:convert';
 
-    import 'package:cekongkir/detail_page.dart';
+    import 'package:cekongkir/Details.dart';
     import 'package:flutter/material.dart';
     import 'package:dropdown_search/dropdown_search.dart';
-    import 'package:cekongkir/Kota.dart';
     import 'package:http/http.dart' as http;
     
     void main() {
       runApp(const MyApp());
     }
-
+ class Kota {
+        String? cityId;
+        String? type;
+        String? cityName;
+      
+        Kota(
+            {this.cityId,
+            this.type,
+            this.cityName});
+      
+        Kota.fromJson(Map<String, dynamic> json) {
+          cityId = json['city_id'];
+          type = json['type'];
+          cityName = json['city_name'];
+        }
+      
+        @override
+        String toString() => cityName as String;
+      
+        static List<Kota> fromJsonList(List list) {
+          if (list.length == 0) return List<Kota>.empty();
+          return list.map((item) => Kota.fromJson(item)).toList();
+        }
+      } 
 
     class MyApp extends StatelessWidget {
       const MyApp({Key? key}) : super(key: key);
